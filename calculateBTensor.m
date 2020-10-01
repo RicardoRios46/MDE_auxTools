@@ -1,4 +1,4 @@
-function [B, b_val] = get_Btensor(g, dt)
+function [B, b_val] = calculateBTensor(g, dt)
 % g: gradient waveform, n*3, in T/m
 % d: step time for each point in gradient waveformt, in s
 
