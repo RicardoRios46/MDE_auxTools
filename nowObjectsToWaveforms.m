@@ -12,7 +12,8 @@ function Waveforms=nowObjectsToWaveforms(problemNOW, resultNOW, rasterTime, scal
 invertWaveform2 = true;
 
 % scale waveform
-waveformScaled = resultNOW.g*scaleFactor;
+waveformScaled = resultNOW.g*scaleFactor; 
+waveformScaled = waveformScaled*1e-3; % from mT/m to T/m
 
 % interpolate waveform
 waveformScaledInterpolated = interpolateWaveform(waveformScaled, problemNOW, resultNOW, rasterTime);
@@ -36,9 +37,9 @@ Waveforms.waveform2_Npoints = size(waveform2,1);
 
 Waveforms.raster_time = rasterTime;
 
-[bTensor, bValue] = get_Btensor(waveformScaledInterpolated, rasterTime);
-Waveforms.b_tensor = bTensor;
-Waveforms.b_value = bValue;
+[bTensor, bValue] = calculateBTensor(waveformScaledInterpolated, rasterTime);
+Waveforms.bTensor = bTensor;
+Waveforms.bValue = bValue;
 
 end
 
