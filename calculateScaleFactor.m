@@ -1,0 +1,19 @@
+function scaleFactor =  calculateScaleFactor(g, dt, desiredBvalue, tol)
+
+step = .001;
+scaleFactor = 1;
+[~, bValue] = calculateBTensor(g, dt);
+
+while not(desiredBvalue-tol < bValue && bValue < desiredBvalue+tol)
+    if bValue < desiredBvalue
+        scaleFactor = scaleFactor+step;
+        gScaled = g*scaleFactor;
+        [~, bValue] = calculateBTensor(gScaled, dt);
+    else %b_val > desiredB
+        scaleFactor=scaleFactor-step;
+        gScaled = g*scaleFactor;
+        [~, bValue] = calculateBTensor(gScaled, dt);
+    end
+end
+
+end
