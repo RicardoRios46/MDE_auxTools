@@ -14,8 +14,6 @@ function brukerRawToImages(folderPath, experimentsFolders, gMaxBruker, filename)
 % Author: Ricardo Rios
 % email:  ricardo.rios@cimat.mx
 
-% ToDo an Optional list to erase volumes
-
 xps = xpsFromBrukerRaw(folderPath, experimentsFolders, gMaxBruker);
 allData = extractDataFromBrukerRaw(folderPath, experimentsFolders);
 
