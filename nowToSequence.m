@@ -21,7 +21,7 @@ function [Waveforms] = nowToSequence(problemNOW, resultNOW, param)
 scaleFactor =  calculateScaleFactor(resultNOW.g*1e-3, resultNOW.dt, param.desiredB, param.tol);
 
 % Warnings if waveforms use too much gradients
-checkGradeintUse(resultNOW.g*1e-3,scaleFactor,param.gMaxBruker)
+checkGradientUse(resultNOW.g*1e-3,scaleFactor,param.gMaxBruker)
 
 % obtain waveform struct
 Waveforms=nowObjectsToWaveforms(problemNOW, resultNOW, param.rasterTime, scaleFactor);
@@ -31,15 +31,3 @@ saveWaveformFile(Waveforms, param.gMaxBruker, param.directionVector, param.fileN
 
 end
 
-function checkGradeintUse(g, scaleFactor, gMaxBruker)
-% checkGradeintUse - checks percentage gradient strength used, trows a
-% warning if 100% is exceded
-g = g*scaleFactor./gMaxBruker;
-gVec = g(:);
-
-maxGradientUsed = max(abs(gVec))*100;
-fprintf('Max gradient power used: %f %% \n',maxGradientUsed)
-if maxGradientUsed > 100
-    warning("Excedding 100% gradient strength for the desired B_value")                
-end
-end
