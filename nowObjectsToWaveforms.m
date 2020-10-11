@@ -34,6 +34,7 @@ Waveforms.waveform1_duration = problemNOW.durationFirstPartActual*1e-3;
 Waveforms.waveform2_duration = problemNOW.durationSecondPartActual*1e-3;
 Waveforms.waveform1_Npoints = size(waveform1,1);
 Waveforms.waveform2_Npoints = size(waveform2,1);
+Waveforms.waveformSeparation_duration = problemNOW.durationZeroGradientActual*1e-3;
 
 Waveforms.raster_time = rasterTime;
 
