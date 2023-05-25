@@ -1,8 +1,8 @@
 function xps = xpsFromBrukerRaw(folderPath, exps, gMaxBruker)
 % xpsFromBrukerRaw - Builds the xps structure needed in the MD-dMRI toolbox
-% from the bruker folder with the indicated experiments. 
-% It need gMaxBruker for the correct calculation of the B-tensos, I am looking
-% for a way to extract it from mehtos parameters
+% from the bruker folder with the indicated experiments (exps). 
+% It needs gMaxBruker for the correct calculation of the B-tensor, I am looking
+% for a way to extract it from methods parameters
 
 % Author: Ricardo Rios
 % email:  ricardo.rios@cimat.mx

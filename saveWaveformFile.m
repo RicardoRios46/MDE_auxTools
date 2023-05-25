@@ -1,5 +1,5 @@
 function saveWaveformFile(Waveforms, gMaxBruker, directionVector, fileName) 
-% saveWaveformFile - Save waveform structure in dormatted files for the MCW
+% saveWaveformFile - Save waveform structure in files compatible with MCW
 % pulse sequences toolbox
 waveforms{1} = Waveforms.waveform1'; % Takings transpose for easy fprint
 waveforms{2} = Waveforms.waveform2';

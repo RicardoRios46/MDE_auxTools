@@ -7,9 +7,9 @@ function [Waveforms] = nowToSequence(problemNOW, resultNOW, param)
 % param: Structure with different input parameters for the pipeline:
 %   gMaxBruker - Max gradient strength on bruker sistem (T/m)
 %   rasterTime - Min raster time on bruker sistem- recommended 10us (s)
-%   desiredB - Desired b value for thw output waveform. It must not exceed
-%           gradient 100 strenght, a warining is displayed if that is the case
-%   tol - Tolerance for calculating the ddeired b value. 10 should do it
+%   desiredB - Desired b value for the output waveform (s/mm^2). It must not exceed
+%           gradient 100 strength, a warning is displayed if that is the case
+%   tol - Tolerance for calculating the desired b value. 10 should do it.
 %   directionVector - main direction used in the waveform. Needed if you
 %           plan to use the rotations on the MCW sequence toolbox. Check their wiki
 %   fileName - Filename of the output files
