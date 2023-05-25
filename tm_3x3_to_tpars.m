@@ -1,6 +1,7 @@
 function t = tm_3x3_to_tpars(t3x3)
 % function t = tm_3x3_to_tpars(t3x3)
-% function taken from md-MRI toolbox https://github.com/markus-nilsson/md-dmri
+% (function taken from md-MRI toolbox github.com/markus-nilsson/md-dmri,
+% copied as it is here for portability but please check its license)
 %
 % Calculate derived tensor parameters.
 %
