@@ -25,11 +25,14 @@ for i_exp = 1:length(exps)
 %     % read Bruker
 %     source = strcat(folder_name, filesep, num2str(expno),filesep, ...
 %         'pdata', filesep, num2str(proc_num), filesep);
-%     acq_params = readBrukerParamFile(strcat(folder_name, filesep,...
-%         num2str(expno),filesep,'acqp'));
+    acq_params = readBrukerParamFile(strcat(folderPath, filesep,...
+         num2str(expno),filesep,'acqp'));
     method_params = readBrukerParamFile(strcat(folderPath, filesep, ...
         num2str(expno),filesep,'method')); % all the sequence parameters should be here
     
+    % Extract acquision matrix (to correct FOV rotation to b-tensor dir)
+    R_acqp = acq_params.ACQ_grad_matrix; % check this is true for budde sequence
+
     % Extracting params
     % ToDo if you are looping over shapes dims change
     waveform1= method_params.DwGradShapeArray1; 
@@ -55,7 +58,8 @@ for i_exp = 1:length(exps)
 
     for j_dir = 1:subTotalImages
         % extract Rotation matrix used
-        R = getR(method_params, j_dir);
+        R_diff = get_Rdiff(method_params, j_dir);
+        R = R_acqp * R_diff; %todo verify this in budde sequence
 
         % rotate waveforms
         waveform1rotated = rotateWaveform(waveform1, R);
@@ -122,9 +126,7 @@ function g = rotateWaveform(waveform, R)
     end
 end
 
-function R = getR(method_params, index)
-    % extract acquisition matrix (fov rotations)
-    R_acqp = squeeze(method_params.Dw_acqgradmatrix_override(index,:,:));
+function R_diff = get_Rdiff(method_params, index)
     % extract rotation matrix for diffusion directions
     R_diff = zeros(3,3);
     R_diff(1,1)=method_params.DwR00(index);
@@ -137,7 +139,6 @@ function R = getR(method_params, index)
     R_diff(3,2)=method_params.DwR21(index);
     R_diff(3,3)=method_params.DwR22(index);
 
-    R = R_acqp * R_diff; %todo verify this in budde sequence
 end
 
 function wfInterpolated = fastInterpolation(wf, duration, rasterTime, dt)
