@@ -8,19 +8,19 @@ Use *help* in Matlab command window to learn how to use the functions and the in
 ## Repositories used in the pipeline:
 * [NOW](https://github.com/jsjol/NOW)
 * [MCW sequences](http://osf.io/ngu4a/)
+* [BrkRaw](https://github.com/BrkRaw/bruker)
 * [MD-dMRI](https://github.com/markus-nilsson/md-dmri)
 
 ## Requirements
 *nowToSequence* needs that *NOW* toolbox is already on matlab path.
 
-*brukerRawToImages* works with *pvmatlab* toolbox from Bruker. To get this toolbox you need to contact Bruker support.
 
-## Limitations
-*MDE_auxTools* is still a work in progress. At this moment *brukerRawToImages* only works if you have used one shape and one gradient amplitude in the MCW sequence toolbox for each acquisition. It works with multiple gradient rotations.
+
+## Notes
+*brukerRawToImages* is still a prototype. Ideally takes raw bruker data and outputs a nifti file with its xps for processing. It uses the *pvmatlab* toolbox from Bruker (To get this toolbox you need to contact Bruker support). For now it only works with one shape and one gradient amplitude for each acquisition (it works with multiple gradient rotations).
 
 ### Roadmap for future implementations:
-* *brukerRawToImages* should work with multiple shapes and amplitudes in each acquisition.
-* A python version of *brukerRawToImages* that uses [BrkRaw](https://github.com/BrkRaw/bruker) insted of Bruker's *pvmatlab*.
-* Function to erase selected volumes from the final Nifti and xps structure.
+* *brukerRawToImages* should work with multiple shapes and amplitudes in each acquisition and use open source software.
+* Erase *pvtools* dependency from *extractDataFromBrukerRaw*.
 * Optional basic preprocessing steps.
 * Tools for basic visualization/evaluation of data and waveforms.
