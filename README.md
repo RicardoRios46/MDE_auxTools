@@ -1,7 +1,8 @@
 # MDE_auxTools (Beta)
 
 *MDE_auxTools* contains some useful functions that help to implement B-tensor Encoding sequences on a Bruker scanner. The functions here are intended to use as connectors for other repositories developed by the DW-MRI scientific community to have a complete acquisition pipeline:
-![resources](https://docs.google.com/drawings/d/e/2PACX-1vSElx1dUpIEyZj7Qmah8D8nCggIHCiVN6n1rGYA-g6wKyGCstxI22sfRcmqYiMsSHgVOmRbNBAp5AK_/pub?w=734&h=440)
+
+![image](https://drive.google.com/uc?export=view&id=1xVbbHms5eVItVbdXMG5nyviWYzp6GRrk)
 
 Use *help* in Matlab command window to learn how to use the functions and the inputs needed.
 ## Repositories used in the pipeline:
