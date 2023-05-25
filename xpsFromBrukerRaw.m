@@ -103,16 +103,21 @@ function g = rotateWaveform(waveform, R)
 end
 
 function R = getR(method_params, index)
-    R = zeros(3,3);
-    R(1,1)=method_params.DwR00(index);
-    R(1,2)=method_params.DwR01(index);
-    R(1,3)=method_params.DwR02(index);
-    R(2,1)=method_params.DwR10(index);
-    R(2,2)=method_params.DwR11(index);
-    R(2,3)=method_params.DwR12(index);
-    R(3,1)=method_params.DwR20(index);
-    R(3,2)=method_params.DwR21(index);
-    R(3,3)=method_params.DwR22(index);
+    % extract acquisition matrix (fov rotations)
+    R_acqp = squeeze(method_params.Dw_acqgradmatrix_override(index,:,:));
+    % extract rotation matrix for diffusion directions
+    R_diff = zeros(3,3);
+    R_diff(1,1)=method_params.DwR00(index);
+    R_diff(1,2)=method_params.DwR01(index);
+    R_diff(1,3)=method_params.DwR02(index);
+    R_diff(2,1)=method_params.DwR10(index);
+    R_diff(2,2)=method_params.DwR11(index);
+    R_diff(2,3)=method_params.DwR12(index);
+    R_diff(3,1)=method_params.DwR20(index);
+    R_diff(3,2)=method_params.DwR21(index);
+    R_diff(3,3)=method_params.DwR22(index);
+
+    R = R_acqp * R_diff; %todo verify this in budde sequence
 end
 
 function wfInterpolated = fastInterpolation(wf, duration, rasterTime, dt)
