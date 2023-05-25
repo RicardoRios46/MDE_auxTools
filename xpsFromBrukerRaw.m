@@ -81,7 +81,7 @@ for i_exp = 1:length(exps)
 
         % Calculate B
         [bTensor, bValue(j_dir)] = calculateBTensor(waveformsConcatenated, rasterTime);
-        bTensorVec(j_dir,:) = tensor2vector(bTensor);
+        bTensorVec(j_dir,:) = tm_3x3_to_1x6(bTensor);
         b_delta(j_dir) = calculateBDelta(bTensor);
     end
     xps.n = xps.n + subTotalImages;
@@ -121,15 +121,28 @@ function wfInterpolated = fastInterpolation(wf, duration, rasterTime, dt)
     wfInterpolated = interp1(x,wf,xq);
 end
 
-function vec = tensor2vector(tensor)
-    vec = zeros(1,6);
-    vec(1) = tensor(1,1);
-    vec(2) = tensor(2,2);
-    vec(3) = tensor(3,3);
-    vec(4) = tensor(1,2);
-    vec(5) = tensor(1,3);
-    vec(6) = tensor(2,3);
+
+
+
+function t = tm_3x3_to_1x6(t)
+% function t = tm_3x3_to_1x6(t)
+% function taken from md-MRI toolbox https://github.com/markus-nilsson/md-dmri
+%
+% Convert a second-order 3x3 tensor to  Voigt-format 1x6
+
+t = t([1 5 9 2 3 6]) .* [1 1 1 sqrt(2) sqrt(2) sqrt(2)];
+
 end
+
+%function vec = tensor2vector(tensor)
+%    vec = zeros(1,6);
+%    vec(1) = tensor(1,1);
+%    vec(2) = tensor(2,2);
+%    vec(3) = tensor(3,3);
+%    vec(4) = tensor(1,2);
+%    vec(5) = tensor(1,3);
+%    vec(6) = tensor(2,3);
+%end
 
 function bDelta = calculateBDelta(B)
     bValue = trace(B);
