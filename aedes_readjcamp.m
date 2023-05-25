@@ -1,6 +1,6 @@
 function jdx = aedes_readjcamp(filename)
 % AEDES_READJCAMP - Read JCAMP DX format files (Bruker parameter files)
-%   
+% (function from aedes toolbox: https://github.com/mjnissi/aedes)
 %
 % Synopsis: 
 %       jdx=aedes_readjcamp(filename)
