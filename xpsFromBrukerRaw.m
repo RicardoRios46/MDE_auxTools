@@ -19,19 +19,17 @@ xps.s_ind = [];
 % Loop between experiments
 for i_exp = 1:length(exps)  
     expno = exps(i_exp);
-%     % Define paths
-%     MethodFilePath = [folder_name, filesep, num2str(expno), ...
-%         filesep,'method'];
-%     % read Bruker
-%     source = strcat(folder_name, filesep, num2str(expno),filesep, ...
-%         'pdata', filesep, num2str(proc_num), filesep);
-    acq_params = readBrukerParamFile(strcat(folderPath, filesep,...
-         num2str(expno),filesep,'acqp'));
-    method_params = readBrukerParamFile(strcat(folderPath, filesep, ...
-        num2str(expno),filesep,'method')); % all the sequence parameters should be here
+    
+    % define paths for metadata
+    acqp_path = [strcat(folderPath, filesep,num2str(expno),filesep,'acqp')];
+    method_path = [strcat(folderPath, filesep, num2str(expno),filesep,'method')];
+
+    % read metada with aedes function
+    acq_params = aedes_readjcamp(acqp_path);
+    method_params = aedes_readjcamp(method_path);
     
     % Extract acquision matrix (to correct FOV rotation to b-tensor dir)
-    R_acqp = acq_params.ACQ_grad_matrix; % check this is true for budde sequence
+    R_acqp = squeeze(acq_params.ACQ_grad_matrix); % check this is true for budde sequence
 
     % Extracting params
     % ToDo if you are looping over shapes dims change
