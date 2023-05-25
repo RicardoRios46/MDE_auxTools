@@ -45,9 +45,10 @@ for i_exp = 1:length(exps)
 
     % loop over directions
     subTotalImages = method_params.DwNB0 + method_params.DwNDirs;
-    bValue = zeros(subTotalImages,1);
     bTensorVec = zeros(subTotalImages,6);
-
+    
+    bValue = zeros(subTotalImages,1); % not in SI units. use b
+    b = zeros(subTotalImages,1);
     b_delta = zeros(subTotalImages,1);
     b_eta = zeros(subTotalImages,1);
     u = zeros(subTotalImages,3);
@@ -102,7 +103,7 @@ for i_exp = 1:length(exps)
 
     end
     xps.n = xps.n + subTotalImages;
-    xps.b = [xps.b; bValue];
+    xps.b = [xps.b; b];
     xps.bt = [xps.bt; bTensorVec];
     xps.b_delta=[xps.b_delta; b_delta];
     xps.b_eta=[xps.b_eta; b_eta];
@@ -153,15 +154,15 @@ function u = get_u_from_tenParam(tp)
     if (tp.eta < 0.1) % skewed tensors?
         
         if (tp.delta == 0) % spherical
-            u(c,:) = tp.lambda33vec;
+            u = tp.lambda33vec;
         elseif (tp.delta > 0) % prolate-to-stick
-            u(c,:) = tp.lambda33vec;
+            u = tp.lambda33vec;
         elseif (tp.delta < 0) % oblate
-            u(c,:) = tp.lambda11vec;
+            u = tp.lambda11vec;
         end
     else
         % not defined for assymmetric tensors
-        u(c,:) = [NaN NaN NaN];
+        u = [NaN NaN NaN];
     end
 end
 
