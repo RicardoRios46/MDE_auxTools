@@ -33,8 +33,8 @@ for i_exp = 1:length(exps)
 
     % Extracting params
     % ToDo if you are looping over shapes dims change
-    waveform1= method_params.DwGradShapeArray1; 
-    waveform2= method_params.DwGradShapeArray2; 
+    waveform1= squeeze(method_params.DwGradShapeArray1); 
+    waveform2= squeeze(method_params.DwGradShapeArray2); 
 
     wf1Npoints=method_params.DwShapePoints1;
     wf2Npoints=method_params.DwShapePoints2;
